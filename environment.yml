@@ -1,0 +1,10 @@
+name: xeus-cling-binder-env
+
+channels:
+  - QuantStack
+  - conda-forge
+
+dependencies:
+  - cling
+  - xeus-cling
+  - notebook
