@@ -1,0 +1,13 @@
+
+SET(MY_LIBRARY_SRCS 
+math60082_sor.cpp 
+math60082_cn.cpp
+)
+
+ADD_LIBRARY( math60082 SHARED
+${MY_LIBRARY_SRCS}
+)
+
+ADD_LIBRARY( math60082_static STATIC
+${MY_LIBRARY_SRCS}
+)
