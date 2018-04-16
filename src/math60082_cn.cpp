@@ -125,26 +125,27 @@ double americanPut_CN(double S0,double X,double T,double r,double sigma,int iMax
             {
                 double y = (d[0] - c[0]*vNew[1])/b[0];
 		y = std::max(y,X-S[0]);
-                vNew[0] = vNew[0] + omega*(y-vNew[0]); 
+		y = vNew[0] + omega*(y-vNew[0]); 
+		error+=(y-vNew[0])*(y-vNew[0]);
+		vNew[0] = y;
             }
             for(int j=1;j<jMax;j++)
             {
                 double y = (d[j] - a[j]*vNew[j-1] - c[j]*vNew[j+1])/b[j];
 		y = std::max(y,X-S[j]);
-                vNew[j] = vNew[j] + omega*(y-vNew[j]); 
+                y = vNew[j] + omega*(y-vNew[j]); 
+		error+=(y-vNew[j])*(y-vNew[j]);
+		vNew[j] = y;
             }
             {
                 double y = (d[jMax] - a[jMax]*vNew[jMax-1])/b[jMax];
 		y = std::max(y,X-S[jMax]);
-                vNew[jMax] = vNew[jMax] + omega*(y-vNew[jMax]); 
-            }
-            // calculate residual norm ||r|| as sum of absolute values
-            error += fabs(d[0] - b[0]*vNew[0] - c[0]*vNew[1]);
-            for(int j=1;j<jMax;j++)
-                error += fabs(d[j] - a[j]*vNew[j-1] - b[j]*vNew[j] - c[j]*vNew[j+1]);
-            error += fabs(d[jMax] - a[jMax]*vNew[jMax-1] - b[jMax]*vNew[jMax]);
+                y = vNew[jMax] + omega*(y-vNew[jMax]); 
+		error+=(y-vNew[jMax])*(y-vNew[jMax]);
+		vNew[jMax] = y;
+	    }    
             // make an exit condition when solution found
-            if(error<tol)
+            if(error<tol*tol)
                 break;
         }
         if(sor>=iterMax)
