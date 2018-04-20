@@ -8,3 +8,5 @@ dependencies:
   - cling
   - xeus-cling
   - notebook
+  - gnuplot
+  - gsl
