@@ -1,5 +1,4 @@
 libgsl-dev
 gnuplot
 libboost-all-dev
-cblas
-
+libatlas-base-dev
