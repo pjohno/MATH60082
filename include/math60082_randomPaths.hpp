@@ -6,7 +6,6 @@
 #include <cmath>
 #include <vector>
 #include <random>
-#include <algorithm>
 
 namespace MATH60082 
 {

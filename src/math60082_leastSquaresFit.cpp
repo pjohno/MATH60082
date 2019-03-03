@@ -93,9 +93,9 @@ namespace MATH60082
         output << "} which gives a range of the function ";
         output << " f\\in["<<fit(0.5*(fit.xTotal-fit.xRange)) << ":"<< fit(0.5*(fit.xTotal+fit.xRange)) <<"]\n";
         output << "# covariance matrix:\n";
-        for(int i=0;i<fit.C.size();i++)
+        for(unsigned int i=0;i<fit.C.size();i++)
         {
-            for(int j=0;j<fit.C[i].size();j++)
+            for(unsigned int j=0;j<fit.C[i].size();j++)
             {
                 std::cout << " " << fit.C[i][j] << " " ;
             }

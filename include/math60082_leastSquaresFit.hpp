@@ -7,10 +7,10 @@
 
 namespace MATH60082
 {
-    
-    
+        
     class LeastSquaresFit
     {
+        
         
         // we will generate a Chebyshev polynomial
         // of degree k
@@ -26,7 +26,7 @@ namespace MATH60082
         // return the fitted value of degree n
         double operator()(double x,unsigned int n) const 
         {
-            unsigned int i=std::min(n,P.size()-1);
+            unsigned int i=std::min(n,(unsigned int)(P.size()-1));
             return P(x,i);
         }
         // return value using highest degree
