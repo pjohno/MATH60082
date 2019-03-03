@@ -5,6 +5,8 @@ math60082_cn.cpp
 math60082_cheb.cpp
 math60082_leastSquaresFit.cpp
 math60082_gnuplot.cpp
+math60082_randomPaths.cpp
+math60082_monteCarloLeastSquares.cpp
 )
 
 ADD_LIBRARY( math60082 SHARED
