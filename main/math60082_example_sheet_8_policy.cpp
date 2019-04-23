@@ -31,18 +31,20 @@ void thomasSolve(const std::vector<double> &a,const std::vector<double> &b_,cons
         rhs[j]=(rhs[j]-c[j]*rhs[j+1])/b[j];
 }
 
-/* Template code for the Explicit Finite Difference
+/* Template code for a Policy Iteration with Finite Difference
  *  American put option with
  *     V(S,T) = max( X-S , 0 )
- *  and
+ *  and policy dictates that either
  *      dV/dt + 1/2 sigma^2 S^2 d^2V/dS^2 + r S dV/dS - r V = 0
- *  with American condition
- *         V >= X - S
+ *  or
+ *         V = X - S 
+ *  holds. Use SOR iteration to decide on policy at each space step.
+ * 
  *  At S=0 we have
  *     V = X
  *  As S->infty, assume V->0.
  */
-double AmericanPut_PSOR(double S0,double X,double T,double r,double sigma,int iMax,int jMax,double SMax,double tol,int iterMax)
+double AmericanPut_policy(double S0,double X,double T,double r,double sigma,int iMax,int jMax,double SMax,double tol,int iterMax)
 {
     double dS=SMax/jMax;
     double dt=T/iMax;
@@ -147,19 +149,23 @@ int main()
     for(int n=10;n<=10000;n*=2)
     {
         int iMax = n, jMax = n;
-        cout << AmericanPut_PSOR(S0, X, T, r, sigma, iMax, jMax, 5.*X,1.e-8,10000) << endl;
+        auto start = std::chrono::steady_clock::now(); 
+        cout << n << " :: " << AmericanPut_policy(S0, X, T, r, sigma, iMax, jMax, 5.*X,1.e-8,10000);
+        auto finish = std::chrono::steady_clock::now(); 
+        auto elapsed = std::chrono::duration_cast<std::chrono::duration<double> >(finish - start);
+        cout << " :: ("<< elapsed.count()<< ")"<< endl;
     }
     /*
-     * OUTPUT >>
-     * 1.21534
-     * 1.42365
-     * 1.47005
-     * 1.47495
-     * 1.4743
-     * 1.47494
-     * 1.475
-     * 1.475
-     * 1.47501
-     * 1.47501
+     * OUTPUT >> " n :: V :: Time (seconds) "
+10 :: 1.21534 :: (5.0663e-05)
+20 :: 1.42365 :: (3.4247e-05)
+40 :: 1.47005 :: (0.000102486)
+80 :: 1.47495 :: (0.000435619)
+160 :: 1.4743 :: (0.00137424)
+320 :: 1.47494 :: (0.00528259)
+640 :: 1.475 :: (0.0213249)
+1280 :: 1.475 :: (0.0856818)
+2560 :: 1.47501 :: (0.417922)
+5120 :: 1.47501 :: (2.00561)
      */
 }

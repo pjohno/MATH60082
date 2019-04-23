@@ -32,18 +32,18 @@ void thomasSolve(const std::vector<double> &a,const std::vector<double> &b_,cons
         rhs[j]=(rhs[j]-c[j]*rhs[j+1])/b[j];
 }
 
-/* Template code for the Explicit Finite Difference
+/* Template code for the penalty method with Finite Difference
  *  American put option with
  *     V(S,T) = max( X-S , 0 )
  *  and
- *      dV/dt + 1/2 sigma^2 S^2 d^2V/dS^2 + r S dV/dS - r V = 0
- *  with American condition
- *         V >= X - S
+ *      dV/dt + 1/2 sigma^2 S^2 d^2V/dS^2 + r S dV/dS - r V  + rho max( (X-S) - P , 0) = 0
+ *  with penalty rho->\infty. 
+ * 
  *  At S=0 we have
  *     V = X
  *  As S->infty, assume V->0.
  */
-double AmericanPut_penalty(double S0,double X,double T,double r,double sigma,int iMax,int jMax,double SMax,double P,double tol,int iterMax)
+double AmericanPut_penalty(double S0,double X,double T,double r,double sigma,int iMax,int jMax,double SMax,double rho,double tol,int iterMax)
 {
     double dS=SMax/jMax;
     double dt=T/iMax;
@@ -89,7 +89,7 @@ double AmericanPut_penalty(double S0,double X,double T,double r,double sigma,int
                 // if current value suggests apply penalty, adjust matrix equations
                 if( vNew[j] < X - S[j] )
                 {
-                    bHat[j]=b[j]-P/dt;dHat[j]=d[j] - P/dt*(X - S[j]);
+                    bHat[j]=b[j]-rho;dHat[j]=d[j] - rho*(X - S[j]);
                 }
             }
             // now solve *Hat matrix problem with thomas
@@ -132,19 +132,23 @@ int main()
     for(int n=10;n<=10000;n*=2)
     {
         int iMax = n, jMax = n;
-        cout << AmericanPut_penalty(S0, X, T, r, sigma, iMax, jMax, 5.*X,2,1.e-8,10000) << endl;
+        auto start = std::chrono::steady_clock::now(); 
+        cout << n << " :: " << AmericanPut_penalty(S0, X, T, r, sigma, iMax, jMax, 5.*X,1.e8,1.e-8,10000);
+        auto finish = std::chrono::steady_clock::now(); 
+        auto elapsed = std::chrono::duration_cast<std::chrono::duration<double> >(finish - start);
+        cout << " :: ("<< elapsed.count()<< ")"<< endl;
     }
     /*
-     * OUTPUT >>
-     * 1.21043
-     * 1.42157
-     * 1.46856
-     * 1.47418
-     * 1.47388
-     * 1.47472
-     * 1.47489
-     * 1.47495
-     * 1.47499
-     * 1.475
+     * OUTPUT >> " n :: V :: Time (seconds) "
+10 :: 1.21534 :: (5.5233e-05)
+20 :: 1.42365 :: (4.5895e-05)
+40 :: 1.47005 :: (0.000127086)
+80 :: 1.47495 :: (0.000408222)
+160 :: 1.4743 :: (0.00149963)
+320 :: 1.47494 :: (0.00491252)
+640 :: 1.475 :: (0.0199213)
+1280 :: 1.475 :: (0.0794912)
+2560 :: 1.47501 :: (0.390522)
+5120 :: 1.47501 :: (1.89866)     
      */
 }
