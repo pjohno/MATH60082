@@ -164,7 +164,6 @@ namespace MATH60082
         return sum;
     }
     
-    
     double normalDistribution(double x)
     {
         return 0.5*erfc(-x/sqrt(2.));

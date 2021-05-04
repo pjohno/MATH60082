@@ -33,4 +33,33 @@ namespace MATH60082
         // end of interpolate
         return temp;
     }
+    
+    // A generic lagrange interpolation function
+    double lagrangeInterpolation(const double *y,const double *x,double x0,unsigned int m,unsigned int n)
+    {
+        if(m<n)return lagrangeInterpolation(y,x,x0,m,m);
+        if(n==0)throw;
+        int nHalf = n/2;
+        int jStar;
+        double dx=x[1]-x[0];
+        if(n%2==0)
+            jStar = int((x0 - x[0])/dx) -(nHalf-1);
+        else
+            jStar = int((x0 - x[0])/dx+0.5)-(nHalf);
+        jStar=std::max(0,jStar);
+        jStar=std::min(int(m-n),jStar);
+        if(n==1)return y[jStar];
+        double temp = 0.;
+        for(unsigned int i=jStar;i<jStar+n;i++){
+            double  int_temp;
+            int_temp = y[i];
+            for(unsigned int j=jStar;j<jStar+n;j++){
+                if(j==i){continue;}
+                int_temp *= ( x0 - x[j] )/( x[i] - x[j] );
+            }
+            temp += int_temp;
+        }
+        // end of interpolate
+        return temp;
+    }
 }   
