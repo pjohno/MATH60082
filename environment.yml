@@ -1,4 +1,4 @@
-name: xeus-cling-binder-env
+name: math60082-project-env
 
 channels:
   - QuantStack
