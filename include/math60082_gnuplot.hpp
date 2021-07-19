@@ -31,6 +31,7 @@ namespace MATH60082
   class GnuplotWidget
   {
   public:
+    gnuplotImage plotCommand(std::istream* commands);
     gnuplotImage plotData(const std::vector<double> &x,const std::vector<double> &y,std::istream* commands = nullptr);
     gnuplotImage plotData(const std::vector<double> &x,const std::vector<std::vector<double>> &y,std::istream* commands = nullptr);
     gnuplotImage plotData(const std::vector<std::vector<double>> &x,const std::vector<std::vector<double>> &y,std::istream* commands = nullptr);
