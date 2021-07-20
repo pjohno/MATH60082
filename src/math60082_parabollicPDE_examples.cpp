@@ -2,7 +2,7 @@
 #include "math60082_parabollicPDE_examples.hpp"
 #include "math60082_blackScholes.hpp"
 #include "math60082_vasicekModel.hpp"
-#include "doxygen_table.hpp"
+#include "math60082_markupTable.hpp"
 #include <iostream>
 #include <fstream>
 #include <cmath>

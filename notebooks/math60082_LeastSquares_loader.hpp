@@ -1,6 +1,6 @@
 #include "math60082_cling_libs_loader.hpp"
 
-#include "doxygen_table.hpp"
+#include "math60082_markupTable.hpp"
 #include "math60082_leastSquaresFit.hpp"
 #include "math60082_randomPaths.hpp"
 #include "math60082_monteCarloLeastSquares.hpp"

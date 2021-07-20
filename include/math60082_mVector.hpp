@@ -72,6 +72,8 @@ namespace MATH60082{
         double& operator[](int index){return v[index];}
         double operator[](int index) const {return v[index];}
         unsigned int size() const {return N;}
+        double front() const {return v[0];}
+        double back() const {return v[N-1];}
         // operations on a vector
         double maxNorm() const;
         double l2Norm() const;
