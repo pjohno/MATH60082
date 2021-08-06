@@ -4,6 +4,8 @@
 using namespace std;
 
 namespace MATH60082{
+    
+  
   
   template<class T=std::string>
   void addColumnEntry(const T& t=std::string("--------------"))

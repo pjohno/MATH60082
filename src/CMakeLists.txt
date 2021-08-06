@@ -17,6 +17,7 @@ math60082_parabollicPDE_examples.cpp
 math60082_fokker_planck.cpp
 math60082_mVector.cpp
 math60082_mMatrix.cpp
+math60082_csv_readline.cpp
 )
 
 ADD_LIBRARY( math60082 SHARED
