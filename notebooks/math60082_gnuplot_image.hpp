@@ -9,15 +9,18 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/process.hpp>
 #include <boost/chrono.hpp>
-#include "xeus/xjson.hpp"
+#include "xtl/xbase64.hpp"
+#include "nlohmann/json.hpp"
+
+namespace nl = nlohmann;
 
 namespace MATH60082{
     
     
     // allow for output from gnuplot to be plotted
-    xeus::xjson mime_bundle_repr(const gnuplotImage& i)
+    nl::json mime_bundle_repr(const gnuplotImage& i)
     {
-        auto bundle = xeus::xjson::object();
+        auto bundle = nl::json::object();
         bundle["image/png"] = encode64(i.imageText);
         return bundle;
     }
