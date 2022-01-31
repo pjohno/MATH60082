@@ -79,21 +79,27 @@ int runFit(std::vector<DataPoint> &data,int p)
             printf ("# chisq = %g\n", chisq);
         }
         
-        std::ofstream output("test.dat");
+        std::cout << "\n Ouput x,y,f(x) to `test.csv` " <<std::endl;
+        std::ofstream output("test.csv");
         for (i = 0; i < n; i++)
         {
-            double yi = data[i].y;
-            output << " " << yi << " ";
             double xi = data[i].x;
-            output << xi <<" ";
+            output << xi << " , ";
+            double yi = data[i].y;
+            output << yi <<" , ";
             double y=0.;
             {
                 double Tn2 = 1.;
                 y += gsl_vector_get(c,(0))*Tn2;
                 double Tn1 = xi;
                 y += gsl_vector_get(c,(1))*Tn1;
-                double Tn = 2.*Tn1*xi - Tn2;
-                y += gsl_vector_get(c,(2))*Tn;
+                for(int j=2;j<p;j++)
+                {
+                    double Tn = 2.*Tn1*xi - Tn2;
+                    y += gsl_vector_get(c,(j))*Tn;
+                    Tn2 = Tn1;
+                    Tn1 = Tn;
+                }
             }
             output << y << std::endl;
         }
