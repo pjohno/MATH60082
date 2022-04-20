@@ -8,4 +8,4 @@ dependencies:
   - cling
   - xeus-cling
   - notebook
-  - boost
+  - boost-cpp
