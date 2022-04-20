@@ -1,4 +1,4 @@
-name: math60082-project-env
+name: math60082-project-env-update
 
 channels:
   - QuantStack
@@ -8,4 +8,4 @@ dependencies:
   - cling
   - xeus-cling
   - notebook
-  - boost-cpp
+  - boost-cpp=1.65.1
