@@ -5,7 +5,10 @@ channels:
   - conda-forge
 
 dependencies:
-  - cling
-  - xeus-cling
+  - cling=0.8
+  - xeus=2.0.0  
+  - xeus-cling=0.13.0
+  - xtl=0.7.2
+  - gcc_linux-64=9.3.0
   - notebook
   - boost-cpp=1.65.1

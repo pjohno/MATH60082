@@ -18,6 +18,7 @@ math60082_fokker_planck.cpp
 math60082_mVector.cpp
 math60082_mMatrix.cpp
 math60082_csv_readline.cpp
+math60082_testProject.cpp
 )
 
 ADD_LIBRARY( math60082 SHARED
