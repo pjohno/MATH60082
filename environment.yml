@@ -5,8 +5,6 @@ channels:
   - conda-forge
 
 dependencies:
-  - cling
-  - xeus  
   - xeus-cling
   - gcc_linux-64=9.3.0
   - notebook
