@@ -1,9 +1,9 @@
-#include "math60082_gsl_fit.hpp"
+#include "math60082_fit.hpp"
 #include "math60082_leastSquaresFit.hpp"
+#include "math60082_markupTable.hpp"
 
 int main()
 {
-    
     std::vector<MATH60082::DataPoint> data = {
         { 0.1 , 1.11997 ,  0.110517 } ,
         { 0.2 , 1.21064 ,  0.12214 } ,
@@ -25,14 +25,16 @@ int main()
         { 1.8 , 6.05394 ,  0.604965 } ,
         { 1.9 , 6.23804 ,  0.668589 } 
     };
-    MATH60082::runFit(data,3);
+    MATH60082::runFitEigen(data,3);
     
     MATH60082::LeastSquaresFit F;
     F.generateFit(3,data);
     std::cout << F << std::endl;
     
+    MATH60082::tableRow("x","y","P(x)");
+    MATH60082::emptyTableRow(3);
     for(auto di : data)
     {
-        std::cout << di.x << " " << di.y << " " << F(di.x) << std::endl;
+        MATH60082::tableRow(di.x,di.y,F(di.x));
     }
 }

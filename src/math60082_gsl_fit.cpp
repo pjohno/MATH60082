@@ -1,4 +1,4 @@
-#include "math60082_gsl_fit.hpp"
+#include "math60082_fit.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -10,7 +10,7 @@
 
 namespace MATH60082
 {
-int runFit(std::vector<DataPoint> &data,int p)
+int runFitGSL(std::vector<DataPoint> &data,int p)
     {
         int i;
         double chisq;

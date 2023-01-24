@@ -14,9 +14,9 @@ namespace MATH60082
         
         // we will generate a Chebyshev polynomial
         // of degree k
-        double chiSq;
+//         double chiSq;
         ChebyshevPolynomial P;
-        std::vector<std::vector<double>> C;
+//         std::vector<std::vector<double>> C;
         double xTotal,xRange;
         
     public:

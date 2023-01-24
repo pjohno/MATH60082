@@ -7,6 +7,8 @@ math60082_leastSquaresFit.cpp
 math60082_gnuplot.cpp
 math60082_randomPaths.cpp
 math60082_gsl_fit.cpp
+math60082_eigen_fit.cpp
+math60082_markupTable.cpp
 math60082_monteCarloLeastSquares.cpp
 math60082_tridag.cpp
 math60082_lagrange_interp.cpp

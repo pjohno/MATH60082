@@ -23,15 +23,33 @@ namespace MATH60082
     return tmp.append((3 - val.size() % 3) % 3, '=');
   }
   
+  struct imageGif
+  {
+        imageGif(const std::string& filename)
+        {
+            std::ifstream fin(filename, std::ios::binary);
+            m_buffer << fin.rdbuf();
+        }
+
+        std::stringstream m_buffer;
+  };
+
   struct gnuplotImage
   {
     std::string imageText;
   };
-  
+
+  struct gnuplotGif
+  {
+    std::string imageText;
+  };
+
   class GnuplotWidget
   {
   public:
+    static void plotToFile(std::istream* commands);
     static gnuplotImage plotCommand(std::istream* commands);
+    static gnuplotGif plotCommandGif(std::istream* commands);
     gnuplotImage plotData(const std::vector<double> &x,const std::vector<double> &y,std::istream* commands = nullptr);
     gnuplotImage plotData(const std::vector<double> &x,const std::vector<std::vector<double>> &y,std::istream* commands = nullptr);
     gnuplotImage plotData(const std::vector<std::vector<double>> &x,const std::vector<std::vector<double>> &y,std::istream* commands = nullptr);

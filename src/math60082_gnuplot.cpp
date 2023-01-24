@@ -7,6 +7,34 @@
 
 namespace MATH60082
 {
+    void GnuplotWidget::plotToFile(std::istream* commands)
+    {
+
+        boost::process::opstream inputStream;
+        boost::process::ipstream outputStream;
+        boost::process::child myProcess("gnuplot",boost::process::std_out > outputStream,boost::process::std_in < inputStream);
+
+        inputStream << "set terminal png"<< std::endl;
+        if(commands){
+            while(!commands->eof())
+            {
+                std::string line;
+                getline(*commands,line);
+                inputStream << line << std::endl;
+            }
+        }
+        inputStream << "q"<< std::endl;
+        myProcess.wait();
+        std::string value;
+        while(!outputStream.eof())
+        {
+            std::string line;
+            getline(outputStream,line);
+            value = value + line + '\n';
+        }
+        return;
+    }
+
     gnuplotImage GnuplotWidget::plotCommand(std::istream* commands)
     {
         
@@ -35,6 +63,35 @@ namespace MATH60082
         return { value };
     }
     
+    gnuplotGif GnuplotWidget::plotCommandGif(std::istream* commands)
+    {
+
+
+        boost::process::opstream inputStream;
+        boost::process::ipstream outputStream;
+        boost::process::child myProcess("gnuplot",boost::process::std_out > outputStream,boost::process::std_in < inputStream);
+
+        inputStream << "set terminal gif"<< std::endl;
+        if(commands){
+            while(!commands->eof())
+            {
+                std::string line;
+                getline(*commands,line);
+                inputStream << line << std::endl;
+            }
+        }
+        inputStream << "q"<< std::endl;
+        myProcess.wait();
+        std::string value;
+        while(!outputStream.eof())
+        {
+            std::string line;
+            getline(outputStream,line);
+            value = value + line + '\n';
+        }
+        return { value };
+    }
+
     gnuplotImage GnuplotWidget::plotData(const std::vector<double> &x,const std::vector<double> &y,std::istream* commands)
     {
         
