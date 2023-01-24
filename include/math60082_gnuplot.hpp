@@ -1,5 +1,6 @@
 #pragma once
 #include <sstream>
+#include <fstream>
 #include <vector>
 #include <boost/archive/iterators/binary_from_base64.hpp>
 #include <boost/archive/iterators/base64_from_binary.hpp>
