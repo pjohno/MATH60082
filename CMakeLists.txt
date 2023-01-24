@@ -6,7 +6,7 @@ FIND_PACKAGE ( Threads REQUIRED )
 FIND_PACKAGE ( Boost REQUIRED )
 FIND_PACKAGE ( Eigen3 REQUIRED )
 
-INCLUDE_DIRECTORIES( include )
+INCLUDE_DIRECTORIES( include ${Eigen3_INCLUDE_DIRS})
 
 ADD_COMPILE_OPTIONS(-Wall -Wextra -Wpedantic -ffast-math -O3)
 

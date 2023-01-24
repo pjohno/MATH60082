@@ -1,8 +1,5 @@
 #!/bin/bash
 
-cd /usr/include
-sudo ln -s eigen3/Eigen .
-cd
 mkdir -p build
 cd build
 cmake ..
