@@ -3,3 +3,4 @@ libgsl-dev
 gnuplot
 libboost-all-dev
 libatlas-base-dev
+libeigen3-dev
