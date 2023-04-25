@@ -5,7 +5,7 @@ using namespace::std;
 
 namespace MATH60082{
   
-void endRow()
+  void endRow()
   {
     cout << "|" <<endl;
   }
